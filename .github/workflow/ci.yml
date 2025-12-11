@@ -1,0 +1,30 @@
+name: Voting dApp CI Pipeline
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+
+jobs:
+  contract-checks:
+    name: 🛡️ Smart Contract Guard
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ambil Kode
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' 
+          cache: 'npm' 
+
+      - name: Install Dependencies
+        run: npm ci 
+
+      - name: Compile Smart Contract
+        run: npx hardhat compile
+
+      - name: Jalankan Test
+        run: npx hardhat test
