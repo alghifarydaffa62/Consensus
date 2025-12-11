@@ -1,11 +1,11 @@
-import type { HardhatUserConfig } from "hardhat/config";
-import "@nomicfoundation/hardhat-ignition";
 import hardhatToolboxMochaEthersPlugin from "@nomicfoundation/hardhat-toolbox-mocha-ethers";
-import * as dotenv from "dotenv"
+import "@nomicfoundation/hardhat-toolbox-mocha-ethers"; 
+import * as dotenv from "dotenv";
+import { configVariable, defineConfig } from "hardhat/config";
 
-dotenv.config()
+dotenv.config();
 
-const config: HardhatUserConfig = {
+export default defineConfig({
   plugins: [hardhatToolboxMochaEthersPlugin],
   solidity: {
     version: "0.8.28",
@@ -21,10 +21,8 @@ const config: HardhatUserConfig = {
     sepolia: {
       type: "http",
       chainType: "l1",
-      url: process.env.ALCHEMY_RPC_URL || "",
-      accounts: [process.env.WALLET_PRIVATE_KEY!],
+      url: configVariable("SEPOLIA_RPC_URL"),
+      accounts: [configVariable("SEPOLIA_PRIVATE_KEY")],
     },
   },
-};
-
-export default config;
+});
