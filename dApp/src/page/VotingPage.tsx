@@ -2,6 +2,9 @@ import { useParams } from "react-router-dom"
 import { useVotingDetails } from "../hooks/useVotingDetails"
 import { Loader2 } from "lucide-react";
 import VotingHeader from "../component/VotingHeader";
+import VotingCandidates from "../component/VotingCandidates";
+
+
 export default function VotingPage() {
     const { address } = useParams()
     const { details, isLoading } = useVotingDetails(address!)
@@ -20,8 +23,12 @@ export default function VotingPage() {
     }
 
     return(
-        <div className="max-w-4xl mx-auto space-y-8">
+        <div className="flex gap-5">
             <VotingHeader details={details}/>
+
+            <div className="w-fit">
+                <VotingCandidates details={details}/>
+            </div>
         </div>
     )
 }

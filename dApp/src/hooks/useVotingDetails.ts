@@ -4,11 +4,17 @@ import VotingABI from "../abi/Voting.json";
 import { fetchIPFSData } from "../utils/fetchIPFSData";
 import { useConfig } from "wagmi";
 
+export interface Candidate {
+    id: string;
+    address: string;
+    voteCount: string;
+}
 export interface VotingDetails {
     address: string;
     metadataURI: string;
     metadata: { title: string; desc: string } | null;
     status: string;
+    candidates: Candidate[];
     remainingTime: bigint;
     owner: string;
 }
@@ -30,6 +36,8 @@ export function useVotingDetails(address: string) {
                     functionName: "metadataURI"
                 })
 
+                const metadataJSON = await fetchIPFSData(metadataURI as string)
+
                 const status = await readContract(config, {
                     address: address as `0x${string}`,
                     abi: VotingABI.abi,
@@ -48,13 +56,45 @@ export function useVotingDetails(address: string) {
                     functionName: "owner"
                 })
 
-                const metadataJSON = await fetchIPFSData(metadataURI as string)
+                const loadedCandidates: Candidate[] = []
+                let index = 0;
+                let keepFetching = true;
 
+                while(keepFetching) {
+                    try {
+                        const candidates = await readContract(config, {
+                            address: address as `0x${string}`,
+                            abi: VotingABI.abi,
+                            functionName: "candidateAddresses",
+                            args: [BigInt(index)]
+                        }) as string
+
+                        const candidateStruct = await readContract(config, {
+                            address: address as `0x${string}`,
+                            abi: VotingABI.abi,
+                            functionName: "candidates",
+                            args: [candidates]
+                        }) as [bigint, bigint, boolean]
+
+                        loadedCandidates.push({
+                            id: candidateStruct[0].toString(),
+                            address: candidates,
+                            voteCount: candidateStruct[1].toString()
+                        })
+
+                        index++
+                    } catch(error) {
+                        console.error("error fetching voting details: ", error)
+                        keepFetching = false
+                    }
+                }
+                
                 setDetails({
                     address,
                     metadataURI: metadataURI as string,
                     metadata: metadataJSON,
                     status: status as string,
+                    candidates: loadedCandidates,
                     remainingTime: remainingTime as bigint,
                     owner: owner as string
                 })
