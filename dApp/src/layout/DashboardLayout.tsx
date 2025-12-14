@@ -16,12 +16,14 @@ export default function DashboardLayout() {
     if (!isConnected) return null; 
 
     return(
-        <div className="flex justify-center gap-20  bg-gray-50">
+        <div className="min-h-screen bg-gray-50">
             <Sidebar />
 
-            <div className="p-5 w-[55vw]">
-                <Outlet /> 
-            </div>
+            <main className="ml-64 w-[calc(100%-16rem)] min-h-screen">
+                <div className="p-8 max-w-7xl mx-auto">
+                    <Outlet /> 
+                </div>
+            </main>
         </div>
     )
 }
