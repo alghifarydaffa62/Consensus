@@ -2,10 +2,29 @@ import { Voting } from "../hooks/useMyCampaigns";
 import { fetchIPFSData } from "../utils/fetchIPFSData";
 import { Link } from "react-router-dom";
 import { Loader2, ArrowRight } from "lucide-react"
+import { useState, useEffect } from "react";
 
 export default function VotingCard({ voting }: {voting: Voting} ) {
-    const {data:metadata, loading} = fetchIPFSData(voting.metadataURI)
+    const [loading, setLoading] = useState(false)
+    const [metadata, setMetadata] = useState<{title: string, desc: string} | null>(null)
 
+    useEffect(() => {
+        const load = async () => {
+            setLoading(true)
+
+            try {
+                const data = await fetchIPFSData(voting.metadataURI)
+                setMetadata(data)
+            } catch(error) {
+                console.error("Error fetching metadata: ", error)
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        load()
+    }, [voting.metadataURI])
+    
     const now = Math.floor(Date.now() / 1000)
     let statusColor = "bg-gray-100 text-gray-600";
     let statusText = "Draft";
