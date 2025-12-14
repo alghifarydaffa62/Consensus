@@ -7,6 +7,7 @@ import CreatePage from "./page/CreatePage"
 import MyCampaigns from "./page/MyCampaigns"
 import ActiveVotes from "./page/ActiveVotes"
 import History from "./page/History"
+import VotingPage from "./page/VotingPage"
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="MyCampaigns" element={<MyCampaigns/>}/>
             <Route path="active" element={<ActiveVotes/>}/>
             <Route path="result" element={<History/>}/>
+            <Route path="vote/:address" element={<VotingPage/>}/>
           </Route>
         </Routes>
       </Router>
