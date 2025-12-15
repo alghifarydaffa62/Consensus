@@ -3,28 +3,7 @@ import { readContract } from "wagmi/actions";
 import VotingABI from "../abi/Voting.json";
 import { fetchIPFSData } from "../utils/fetchIPFSData";
 import { useConfig } from "wagmi";
-
-export interface Candidate {
-    id: string;
-    address: string;
-    voteCount: string;
-}
-
-export interface Voter {
-    address: string;
-    votedCandidate: string;
-}
-
-export interface VotingDetails {
-    address: string;
-    metadataURI: string;
-    metadata: { title: string; desc: string } | null;
-    status: string;
-    candidates: Candidate[];
-    voters: Voter[];
-    remainingTime: bigint;
-    owner: string;
-}
+import { VotingDetails, Voter, Candidate } from "../types";
 
 export function useVotingDetails(address: string) {
     const [details, setDetails] = useState<VotingDetails | null>(null)

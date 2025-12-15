@@ -1,4 +1,4 @@
-import { Voting } from "../hooks/useMyCampaigns";
+import { Voting } from "../types";
 import { fetchIPFSData } from "../utils/fetchIPFSData";
 import { Link } from "react-router-dom";
 import { Loader2, ArrowRight } from "lucide-react"
