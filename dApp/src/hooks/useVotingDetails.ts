@@ -9,6 +9,7 @@ export interface Candidate {
     address: string;
     voteCount: string;
 }
+
 export interface VotingDetails {
     address: string;
     metadataURI: string;
@@ -88,7 +89,7 @@ export function useVotingDetails(address: string) {
                         keepFetching = false
                     }
                 }
-                
+
                 setDetails({
                     address,
                     metadataURI: metadataURI as string,
