@@ -22,6 +22,7 @@ contract Voting is Ownable {
 
   mapping(address => Voter) public voters;
   mapping(address => Candidate) public candidates;
+  address[] public voterAddresses;
   address[] public candidateAddresses;
 
   event registerVoterSuccess(address indexed admin, address indexed voter);
@@ -62,6 +63,9 @@ contract Voting is Ownable {
           hasVoted: false,
           isRegistered: true
       });
+
+      voterAddresses.push(_voter);
+      
       emit registerVoterSuccess(msg.sender, _voter);
       return true;
   }

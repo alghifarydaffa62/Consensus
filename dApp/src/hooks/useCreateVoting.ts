@@ -3,7 +3,7 @@ import { useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { uploadMetadata } from "../utils/uploadMetadata";
 import VotingFactoryABI from "../abi/VotingFactory.json"
 
-const FACTORY_ADDRESS = "0x7c0eDfA74C2c5A066255ED1C481658247Fb21a07"
+const FACTORY_ADDRESS = import.meta.env.VITE_VOTING_FACTORY
 
 export function useCreateVoting() {
     const [title, setTitle] = useState("")
