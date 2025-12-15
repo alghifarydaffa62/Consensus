@@ -38,8 +38,7 @@ export default function VotingHeader({ details }: VotingHeaderProps) {
                             </span>
                         </div>
                     </div>
-                    
-                    {/* Timer Countdown */}
+
                     {details.status === 'Active' && (
                         <div className="text-right">
                             <p className="text-sm text-gray-400 mb-1 flex items-center justify-end gap-1">

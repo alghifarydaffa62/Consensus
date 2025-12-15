@@ -48,8 +48,7 @@ export default function RegisterCandidatesBox({ contractAddress }: { contractAdd
                     {isLoading ? <Loader2 className="animate-spin" /> : "Add"}
                 </button>
             </form>
-
-            {/* Feedback UI */}
+            
             {isSuccess && (
                 <div className="mt-4 p-3 bg-green-50 text-green-700 rounded-lg text-sm flex items-center gap-2 animate-fade-in">
                     <CheckCircle size={16} />
