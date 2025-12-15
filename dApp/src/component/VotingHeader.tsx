@@ -3,6 +3,7 @@ import { VotingDetails } from "../hooks/useVotingDetails"
 import { useState } from "react";
 import Modal from "./Modal";
 import RegisterCandidatesBox from "./RegisterCandidatesBox";
+import RegisterVotersBox from "./RegisterVotersBox";
 import { useConnection } from "wagmi";
 
 interface VotingHeaderProps {
@@ -85,9 +86,16 @@ export default function VotingHeader({ details }: VotingHeaderProps) {
             </div>
 
             <Modal 
+                isOpen={activeModal === "voter"} 
+                onClose={closeModal} 
+                title="Register Participant of this vote"
+            >
+                <RegisterVotersBox contractAddress={details.address}/>
+            </Modal>
+            <Modal 
                 isOpen={activeModal === "candidate"} 
                 onClose={closeModal} 
-                title="Daftarkan Kandidat Baru"
+                title="Register Candidate of this vote"
             >
                 <RegisterCandidatesBox contractAddress={details.address} />
             </Modal>
