@@ -31,7 +31,7 @@ export default function Sidebar() {
             <div className="p-8 pb-4">
                 <div className="flex items-center gap-2 text-amber-600">
                     <Vote size={32} />
-                    <h1 className="text-2xl font-extrabold tracking-tight">BlockVote</h1>
+                    <h1 className="text-2xl font-extrabold tracking-tight">Consensus</h1>
                 </div>
             </div>
 
