@@ -1,14 +1,10 @@
 import { User, Clock, UserPlus, Play } from "lucide-react"
-import { VotingDetails } from "../hooks/useVotingDetails"
+import { VotingHeaderProps } from "../types";
 import { useState } from "react";
 import Modal from "./Modal";
 import RegisterCandidatesBox from "./RegisterCandidatesBox";
 import RegisterVotersBox from "./RegisterVotersBox";
 import { useConnection } from "wagmi";
-
-interface VotingHeaderProps {
-    details: VotingDetails; 
-}
 
 export default function VotingHeader({ details }: VotingHeaderProps) {
     const { address } = useConnection()

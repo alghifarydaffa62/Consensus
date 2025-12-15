@@ -3,16 +3,9 @@ import VotingFactoryABI from "../abi/VotingFactory.json"
 import VotingABI from "../abi/Voting.json"
 import { useState, useEffect} from "react"
 import { readContract } from "wagmi/actions";
+import { Voting } from "../types";
 
 const FACTORY_ADDRESS = import.meta.env.VITE_VOTING_FACTORY
-
-export interface Voting {
-    address: string,
-    metadataURI: string,
-    isVotingStarted: boolean,
-    votingEndTime: bigint,
-    owner: string
-}
 
 export function useMyCampaigns() {
     const { address: userAddress } = useConnection()
