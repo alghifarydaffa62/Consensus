@@ -4,6 +4,7 @@ import { useState } from "react";
 import Modal from "./Modal";
 import RegisterCandidatesBox from "./RegisterCandidatesBox";
 import RegisterVotersBox from "./RegisterVotersBox";
+import StartVotingForm from "./startVotingForm";
 import { useConnection } from "wagmi";
 
 export default function VotingHeader({ details }: VotingHeaderProps) {
@@ -58,21 +59,21 @@ export default function VotingHeader({ details }: VotingHeaderProps) {
                     <div className="mt-8 flex gap-3">
                         <button 
                             onClick={() => setActiveModal("voter")}
-                            className="flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-50 text-blue-700 font-semibold hover:bg-blue-100 transition border border-blue-100"
+                            className="cursor-pointer flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-50 text-blue-700 font-semibold hover:bg-blue-100 transition border border-blue-100"
                         >
                             <UserPlus size={18} /> Register Voter
                         </button>
                         
                         <button 
                             onClick={() => setActiveModal("candidate")}
-                            className="flex items-center gap-2 px-5 py-3 rounded-xl bg-amber-50 text-amber-700 font-semibold hover:bg-amber-100 transition border border-amber-100"
+                            className="cursor-pointer flex items-center gap-2 px-5 py-3 rounded-xl bg-amber-50 text-amber-700 font-semibold hover:bg-amber-100 transition border border-amber-100"
                         >
                             <UserPlus size={18} /> Register Candidate
                         </button>
                         
                         <button 
                             onClick={() => setActiveModal("start")}
-                            className="flex items-center gap-2 px-5 py-3 rounded-xl bg-green-600 text-white font-semibold hover:bg-green-700 transition shadow-sm hover:shadow-md ml-auto"
+                            className="cursor-pointer flex items-center gap-2 px-5 py-3 rounded-xl bg-green-600 text-white font-semibold hover:bg-green-700 transition shadow-sm hover:shadow-md ml-auto"
                         >
                             <Play size={18} /> Start Voting
                         </button>
@@ -93,6 +94,13 @@ export default function VotingHeader({ details }: VotingHeaderProps) {
                 title="Register Candidate of this vote"
             >
                 <RegisterCandidatesBox contractAddress={details.address} />
+            </Modal>
+            <Modal 
+                isOpen={activeModal === "start"} 
+                onClose={closeModal} 
+                title="Start this voting"
+            >
+                <StartVotingForm contractAddress={details.address}/>
             </Modal>
         </>
     )
