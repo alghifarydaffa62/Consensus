@@ -52,7 +52,6 @@ export default function RegisterVotersBox({ contractAddress }: { contractAddress
 
     return(
         <div className="space-y-6">
-            {/* Input Area */}
             <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">Tambah Alamat Pemilih</label>
                 <div className="flex gap-2">
@@ -65,7 +64,7 @@ export default function RegisterVotersBox({ contractAddress }: { contractAddress
                     <button 
                         onClick={handleAdd}
                         disabled={!inputValue}
-                        className="bg-gray-100 text-gray-700 px-4 rounded-xl font-medium hover:bg-gray-200 disabled:opacity-50 transition flex flex-col items-center justify-center gap-1 min-w-[80px]"
+                        className="bg-gray-100 text-gray-700 px-4 rounded-xl font-medium hover:bg-gray-200 disabled:opacity-50 transition flex flex-col items-center justify-center gap-1 min-w-20"
                     >
                         <Plus size={20} />
                         <span className="text-xs">Add</span>
@@ -74,7 +73,6 @@ export default function RegisterVotersBox({ contractAddress }: { contractAddress
                 <p className="text-xs text-gray-400">Tips: Anda bisa copy-paste daftar alamat dari Excel langsung ke sini.</p>
             </div>
 
-            {/* List Preview (Daftar Sementara) */}
             {voterList.length > 0 && (
                 <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
                     <div className="flex justify-between items-center mb-3">
@@ -102,7 +100,6 @@ export default function RegisterVotersBox({ contractAddress }: { contractAddress
                 </div>
             )}
 
-            {/* Action Button (Submit) */}
             <button 
                 onClick={handleSubmit}
                 disabled={isLoading || voterList.length === 0}
@@ -111,7 +108,6 @@ export default function RegisterVotersBox({ contractAddress }: { contractAddress
                 {isLoading ? <Loader2 className="animate-spin" /> : "Register All Voters to Blockchain"}
             </button>
 
-            {/* Feedback Messages */}
             {isSuccess && (
                 <div className="p-3 bg-green-50 text-green-700 rounded-lg text-sm flex items-center gap-2">
                     <CheckCircle size={16} />

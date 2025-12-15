@@ -10,12 +10,18 @@ export interface Candidate {
     voteCount: string;
 }
 
+export interface Voter {
+    address: string;
+    votedCandidate: string;
+}
+
 export interface VotingDetails {
     address: string;
     metadataURI: string;
     metadata: { title: string; desc: string } | null;
     status: string;
     candidates: Candidate[];
+    voters: Voter[];
     remainingTime: bigint;
     owner: string;
 }
@@ -90,12 +96,45 @@ export function useVotingDetails(address: string) {
                     }
                 }
 
+                const loadedVoter: Voter[] = []
+                let voterIndex = 0;
+                let fetchVoter = true;
+
+                while(fetchVoter) {
+                    try {
+                        const voters = await readContract(config, {
+                            address: address as `0x${string}`,
+                            abi: VotingABI.abi,
+                            functionName: "voterAddresses",
+                            args: [BigInt(voterIndex)]
+                        }) as string
+
+                        const voterStruct = await readContract(config, {
+                            address: address as `0x${string}`,
+                            abi: VotingABI.abi,
+                            functionName: "voters",
+                            args: [voters]
+                        }) as [bigint, boolean, boolean]
+
+                        loadedVoter.push({
+                            address: voters,
+                            votedCandidate: voterStruct[2].toString()
+                        })
+
+                        voterIndex++
+                    } catch(error) {
+                        console.error("error fetching voters: ", error)
+                        fetchVoter = false
+                    }
+                }
+
                 setDetails({
                     address,
                     metadataURI: metadataURI as string,
                     metadata: metadataJSON,
                     status: status as string,
                     candidates: loadedCandidates,
+                    voters: loadedVoter,
                     remainingTime: remainingTime as bigint,
                     owner: owner as string
                 })

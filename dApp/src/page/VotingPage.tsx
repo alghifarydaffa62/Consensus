@@ -3,7 +3,7 @@ import { useVotingDetails } from "../hooks/useVotingDetails"
 import { Loader2 } from "lucide-react";
 import VotingHeader from "../component/VotingHeader";
 import VotingCandidates from "../component/VotingCandidates";
-
+import VotingVoters from "../component/VotingVoters";
 
 export default function VotingPage() {
     const { address } = useParams()
@@ -23,12 +23,19 @@ export default function VotingPage() {
     }
 
     return(
-        <div className="flex gap-5">
-            <VotingHeader details={details}/>
+        <div>
+            <div className="flex gap-5">
+                <VotingHeader details={details}/>
 
-            <div className="w-fit">
-                <VotingCandidates details={details}/>
+                <div className="w-fit">
+                    <VotingCandidates details={details}/>
+                </div>
+            </div>
+
+            <div className="w-fit mt-5">
+                <VotingVoters details={details}/>
             </div>
         </div>
+        
     )
 }
