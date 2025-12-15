@@ -1,8 +1,4 @@
-import { VotingDetails } from "../hooks/useVotingDetails"
-
-interface VotingCandidatesProps {
-    details: VotingDetails;
-}
+import { VotingCandidatesProps } from "../types";
 
 export default function VotingCandidates({ details }: VotingCandidatesProps) {
 
@@ -19,7 +15,6 @@ export default function VotingCandidates({ details }: VotingCandidatesProps) {
         <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
             <h1>Candidates of this Vote</h1>
 
-            
             <ul>
                 {candidates.map((candidate, index) => (
                     <div key={index}>

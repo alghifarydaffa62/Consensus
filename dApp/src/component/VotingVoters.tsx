@@ -1,8 +1,4 @@
-import { VotingDetails } from "../hooks/useVotingDetails"
-
-interface VotingVotersProps {
-    details: VotingDetails;
-}
+import { VotingVotersProps } from "../types";
 
 export default function VotingVoters({ details }: VotingVotersProps) {
     const voters = details.voters || []
