@@ -46,9 +46,9 @@ export default function Sidebar() {
                     Dashboard
                 </NavLink>
 
-                <NavLink to="/dashboard/active" className={getLinkClass}>
+                <NavLink to="/dashboard/eligible" className={getLinkClass}>
                     <Vote size={20} />
-                    Active Votes
+                    Eligible Votes
                 </NavLink>
 
                 <NavLink to="/dashboard/result" className={getLinkClass}>
