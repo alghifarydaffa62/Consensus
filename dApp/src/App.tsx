@@ -5,7 +5,7 @@ import DashboardLayout from "./layout/DashboardLayout"
 import Dashboard from "./page/Dashboard"
 import CreatePage from "./page/CreatePage"
 import MyCampaigns from "./page/MyCampaigns"
-import ActiveVotes from "./page/ActiveVotes"
+import EligibleVotes from "./page/EligibleVotes"
 import History from "./page/History"
 import VotingPage from "./page/VotingPage"
 
@@ -20,7 +20,7 @@ function App() {
             <Route index element={<Dashboard/>}/>
             <Route path="create" element={<CreatePage/>}/>
             <Route path="MyCampaigns" element={<MyCampaigns/>}/>
-            <Route path="active" element={<ActiveVotes/>}/>
+            <Route path="eligible" element={<EligibleVotes/>}/>
             <Route path="result" element={<History/>}/>
             <Route path="vote/:address" element={<VotingPage/>}/>
           </Route>

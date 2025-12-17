@@ -36,6 +36,5 @@ export default function VotingPage() {
                 <VotingVoters details={details}/>
             </div>
         </div>
-        
     )
 }

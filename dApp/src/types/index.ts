@@ -23,11 +23,12 @@ export interface VotingDetails {
 }
 
 export interface Voting {
-    address: string,
-    metadataURI: string,
-    isVotingStarted: boolean,
-    votingEndTime: bigint,
-    owner: string
+    address: string;
+    metadataURI: string;
+    isVotingStarted: boolean;
+    votingEndTime: bigint;
+    owner: string;
+    userRole?: "Owner" | "Candidate" | "Voter";
 }
 
 export interface VotingCandidatesProps {

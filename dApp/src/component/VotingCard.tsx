@@ -28,6 +28,7 @@ export default function VotingCard({ voting }: {voting: Voting} ) {
     const now = Math.floor(Date.now() / 1000)
     let statusColor = "bg-gray-100 text-gray-600";
     let statusText = "Draft";
+    let role;
 
     if (voting.isVotingStarted) {
         if (now < Number(voting.votingEndTime)) {
@@ -42,12 +43,24 @@ export default function VotingCard({ voting }: {voting: Voting} ) {
         statusText = "Pending Start";
     }
 
+    if(voting.userRole == "Owner") {
+        role = "Owner";
+    } else if(voting.userRole == "Candidate") {
+        role = "Candidate";
+    } else {
+        role = "Voter";
+    }
+
     return (
         <div className="bg-white border w-md border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow">
             <div className="flex justify-between items-start mb-4">
-                <span className={`px-3 py-1 rounded-full text-xs font-bold ${statusColor}`}>
-                    {statusText}
-                </span>
+                <div className="flex gap-3">
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${statusColor}`}>
+                        {statusText}
+                    </span>
+                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-blue-500">{role}</span>
+                </div>
+                
                 <span className="text-xs text-gray-400 font-mono">
                     {voting.address.slice(0, 6)}...{voting.address.slice(-4)}
                 </span>
